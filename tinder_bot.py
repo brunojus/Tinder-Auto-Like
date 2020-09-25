@@ -2,16 +2,22 @@ from selenium import webdriver
 from time import sleep
 from secrets import username,password
 from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
 
 class TinderBot():
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
     
     def login(self):
         self.driver.get('https://tinder.com')
 
         sleep(5)
-        self.driver.find_element_by_xpath("//button[@type = 'button' and @aria-label = 'Entrar com Facebook']//span").click()
+
+        self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/header/div[1]/div[2]/div/button').click()
+
+        sleep(5)
+        
+        self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[1]/div/div[3]/span/div[2]/button').click()
 
 
         # Switch to login popup
